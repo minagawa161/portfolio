@@ -1,0 +1,3 @@
+mixin img(image, alt = '')
+  - const { width, height } = imageSize(image); // gulp-dataで定義したimageSize関数
+  img(src=image, alt=alt, width=width, height=height)&attributes(attributes)

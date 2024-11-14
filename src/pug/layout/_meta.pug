@@ -1,0 +1,21 @@
+meta(charset="UTF-8")
+meta(name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0")
+//- ページタイトル
+title=pageData.title
+
+//- description
+meta(name="description" content=pageData.description)
+
+//- OGP 個別
+meta(property="og:title" content=pageData.title)
+meta(property="og:type" content=pageData.og_type)
+
+//- 共通
+meta(property="og:site_name" content=data.og_site_name)
+meta(property="og:locale" content=data.og_locale)
+
+//- 電話番号の自動リンク化を無効
+meta(name="format-detection" content="telephone=no")
+
+//- ファビコン
+//- link(rel="icon", href=`/favicon.ico`)

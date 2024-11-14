@@ -1,0 +1,57 @@
+@use "sass:math";
+@use "global" as *;
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "PP Gosha Sans";
+  font-weight: 400;
+
+  src: url("../font/GoshaSans-Regular.woff2") format("woff2"),
+  url("../font/GoshaSans-Regular.woff") format("woff");
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  @include default-font;
+
+  background: #212121;
+  min-height: 100svh;
+  overflow: clip;
+  line-height: 1;
+  color: #fff;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  background: transparent;
+  padding: 0;
+  border: none;
+  border-radius: 0;
+  font: inherit;
+  color: currentColor;
+  text-align: left;
+  cursor: pointer;
+
+  appearance: none;
+}
+
+img, video, canvas, svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: none;
+}

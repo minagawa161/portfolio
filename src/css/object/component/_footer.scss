@@ -1,0 +1,13 @@
+@use "sass:math";
+@use "global" as *;
+
+.footer {
+  display: grid;
+
+  gap: length(64);
+  place-items: center;
+
+  @include mq {
+    gap: length-md(40);
+  }
+}

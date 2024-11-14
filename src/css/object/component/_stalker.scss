@@ -1,0 +1,33 @@
+@use "sass:math";
+@use "global" as *;
+
+.stalker {
+  display: none;
+  @media (any-hover: hover) {
+    @include font-size(16);
+
+    display: grid;
+    background: #fff;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: length(70);
+    border-radius: max(100vw, 100vh);
+    line-height: 1;
+    color: #212121;
+    text-align: center;
+    white-space: pre-line;
+    pointer-events: none;
+
+    aspect-ratio: 1;
+    clip-path: circle(0% at 50% 50%);
+    mix-blend-mode: difference;
+    place-items: center;
+
+    @include mq {
+      @include font-size-md(16);
+
+      width: length-md(100);
+    }
+  }
+}

@@ -1,0 +1,97 @@
+@use "sass:math";
+@use "global" as *;
+
+.modal {
+  display: grid;
+  background: #212121;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 vmin($side-width);
+  overflow: auto;
+  visibility: hidden;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 999;
+
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  place-items: center;
+
+  @include mq {
+    padding: 0 vw($side-width-md, $desktop) 0
+    calc(#{vw($side-width-md, $desktop)} + var(--scrollbar-width, 0));
+  }
+  &.is-active {
+    pointer-events: auto;
+  }
+}
+.modal__content {
+  position: relative;
+  width: 100%;
+  padding-bottom: length(100);
+  z-index: 0;
+
+  @include mq {
+    max-width: length-md($desktop - $side-width-md * 2);
+    padding-bottom: length-md(120);
+  }
+}
+.modal__foot {
+  margin-top: length(100);
+
+  @include mq {
+    margin: length-md(120) vw(-$side-width-md * 0.5, $desktop) 0;
+  }
+}
+
+.modal-nav {
+  display: grid;
+  justify-content: space-between;
+
+  gap: length(72);
+  grid-template-columns: repeat(2, auto);
+  justify-items: center;
+
+  @include mq {
+    display: flex;
+
+    gap: length-md(72);
+  }
+}
+.modal-nav__item {
+  @include font-size(24);
+
+  white-space: pre-line;
+
+  @include mq {
+    @include font-size-md(24);
+  }
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+.modal-nav__item--small {
+  @include font-size(20);
+}
+.modal-nav__item--2 {
+  @include mq {
+    order: 2;
+  }
+}
+.modal-nav__item--3 {
+  grid-column-start: span 2;
+
+  @include mq {
+    order: 1;
+
+    grid-column-start: auto;
+  }
+}
+.modal-nav__item--4 {
+  margin: 0 auto;
+
+  grid-column-start: span 2;
+}

@@ -1,0 +1,33 @@
+mixin header
+  header.header.js-header&attributes(attributes)
+    .header__logo.header-logo
+      h1.header-logo__main.heading-2
+        | Toshihiro Minagawa
+      p.header-logo__sub
+        | Japanese Front-end Developer
+    button.header__button.header-button.js-menu-button.none-md(type="button")
+      | &lt;&nbsp;
+      span.header-button__inner
+        span.header-button__text.header-button__text--1
+          | Menu
+        span.header-button__text.header-button__text--2
+          | Close
+      | &nbsp;&gt;
+    .header__menu.menu(role="dialog" aria-label="Menu" aria-modal="true").js-menu-modal
+      .menu__content.js-modal-content
+        ul.menu-list
+          li.menu-list__item
+            button.menu-list__button.button-wrapper.uppercase.js-menu-home-button(type="button")
+              | home
+              span.button-bg
+                span.button-bg__inner
+          li.menu-list__item
+            button.menu-list__button.button-wrapper.uppercase.js-menu-about-button(type="button")
+              | about
+              span.button-bg
+                span.button-bg__inner
+          li.menu-list__item
+            a.menu-list__button.button-wrapper.uppercase(href="mailto:toshihiro.minagawa@gmail.com")
+              | contact
+              span.button-bg
+                span.button-bg__inner

@@ -1,0 +1,99 @@
+@use "sass:math";
+@use "variable" as *;
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return math.div($number, ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+@function vw($number, $width: $mobile) {
+  @return calc(
+    var(--vw, 1vw) * #{strip-unit($number)} / #{strip-unit($width)} * 100
+  );
+}
+
+@function vmax($number, $width: $mobile) {
+  @return calc(
+    max(var(--vw, 1vw), 1svh) * #{strip-unit($number)} / #{strip-unit($width)} *
+      100
+  );
+}
+
+@function vmin($number, $width: $mobile) {
+  @return calc(
+    min(var(--vw, 1vw), 1svh) * #{strip-unit($number)} / #{strip-unit($width)} *
+      100
+  );
+}
+
+@function length($number) {
+  $number: strip-unit($number);
+  @if $number < 0 {
+    @return max(vmin($number), $number * 1.5 * 1px);
+  }
+  @return min(vmin($number), $number * 1.5 * 1px);
+}
+@function length-md($number) {
+  $number: strip-unit($number);
+  @if $number < 0 {
+    @return max(vw($number, $desktop), $number * 1.25 * 1px);
+  }
+  @return min(vw($number, $desktop), $number * 1.25 * 1px);
+}
+
+@function length-from-center($number) {
+  @return calc(
+    50% - #{length(
+        map-get($map: $DESIGN_WIDTHS, $key: "mobile") * 0.5 - $number
+      )}
+  );
+}
+@function length-md-from-center($number) {
+  @return calc(
+    50% - #{length-md(
+        map-get($map: $DESIGN_WIDTHS, $key: "desktop") * 0.5 - $number
+      )}
+  );
+}
+
+@function font-length($length, $width: $mobile) {
+  $length: strip-unit($length);
+  @return clamp(
+    #{$length * math.div(640, 768) * 0.1}rem,
+    calc(
+      #{$length * 0.1rem} + (min(var(--vw, 1vw), 1svh) * 100 - #{$width}) * #{math.div(
+          $length,
+          strip-unit($width)
+        )}
+    ),
+    #{$length * 1.5 * 0.1}rem
+  );
+}
+
+// デフォルトはPCデザインの87.5% - 112.5%まで拡大縮小する
+// 等倍で拡大縮小させたいときは$scaleを0.25とする
+// ただし等倍はズームに応じて大きさが変化しなくなる
+@function font-length-md($length, $scale: 0.25 * 0.5) {
+  $length: strip-unit($length);
+
+  @return min(
+    calc(
+      #{$length * 0.1rem} + #{$length * $scale} *
+        (var(--vw, 1vw) * 100 - #{$desktop}) / #{strip-unit($desktop * 0.25)}
+    ),
+    #{($length * ($scale + 1)) * 0.1rem}
+  );
+}
+
+@function fluid-size($min-size, $max-size, $min-vw, $max-vw) {
+  @return clamp(
+    $min-size,
+    calc(
+      #{$min-size} + #{strip-unit($max-size - $min-size)} *
+        (var(--vw, 1vw) * 100 - #{$min-vw}) / #{strip-unit($max-vw - $min-vw)}
+    ),
+    $max-size
+  );
+}

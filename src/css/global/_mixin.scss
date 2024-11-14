@@ -1,0 +1,74 @@
+@use "sass:math";
+@use "variable" as *;
+@use "function" as *;
+
+// https://ics.media/entry/200317/ に游ゴシックを追加
+// https://blog.yoshinonaco.com/font-family-2020/#toc22
+@mixin default-font {
+  font-family: "PP Gosha Sans", "游ゴシック体", YuGothic, "游ゴシック Medium",
+  "Yu Gothic Medium", "游ゴシック", "Yu Gothic", "Hiragino Kaku Gothic ProN",
+  "Hiragino Sans", Meiryo, sans-serif;
+}
+
+// 游ゴシック体でboldを使いたいとき
+@mixin bold {
+  font-family: "游ゴシック体", YuGothic, "游ゴシック", "Yu Gothic",
+  "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  font-weight: bold;
+}
+// 基本的にはmixinを使うが。font-size以外でfont-size関数を使いたいことがあるのでfunctionも残してある
+@mixin font-size($length, $width: $mobile) {
+  font-size: font-length($length, $width);
+}
+@mixin font-size-md($length, $scale: 0.25 * 0.5) {
+  font-size: font-length-md($length, $scale);
+}
+
+// https://yuyakinoshita.com/blog/2020/01/20/line-height-crop/
+@mixin line-height-crop($line-height, $once: true) {
+  &::before {
+    margin-top: calc((1 - #{$line-height}) * 0.5em);
+    @if ($once == true) {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+    }
+  }
+  &::after {
+    margin-bottom: calc((1 - #{$line-height}) * 0.5em);
+    @if ($once == true) {
+      content: "";
+      display: block;
+      width: 0;
+      height: 0;
+    }
+  }
+}
+
+@mixin mq($breakpoint: $medium) {
+  @media screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin dp($ratio) {
+  @media (-webkit-min-device-pixel-ratio: $ratio), (min-resolution: #{$ratio}dppx) {
+    @content;
+  }
+}
+
+@mixin landscape {
+  @media screen and (orientation: landscape) {
+    @content;
+  }
+}
+
+// https: //ics.media/entry/221208/
+@mixin hover {
+  @media (any-hover: hover) {
+    &:hover {
+      @content;
+    }
+  }
+}

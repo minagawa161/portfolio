@@ -1,0 +1,41 @@
+@use "sass:math";
+@use "global" as *;
+
+.scroll-down {
+  @include font-size(10);
+
+  position: absolute;
+  bottom: length(40);
+  right: length(4);
+  visibility: hidden;
+  opacity: 0;
+
+  @include mq {
+    @include font-size-md(16);
+
+    bottom: length-md(48);
+    right: length-md(40);
+  }
+}
+.scroll-down-icon {
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+}
+
+.scroll-down-icon__item {
+  animation: 2s linear infinite down;
+}
+.scroll-down-icon__item--2 {
+  position: absolute;
+  top: -125%;
+  left: 0;
+}
+@keyframes down {
+  0% {
+    transform: translateY(0%);
+  }
+  100% {
+    transform: translateY(125%);
+  }
+}

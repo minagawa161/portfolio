@@ -1,0 +1,26 @@
+@use "sass:math";
+@use "global" as *;
+
+.contact {
+  display: grid;
+  width: 100%;
+  overflow: hidden;
+  border: 2px solid #fff;
+  border-radius: length(10);
+
+  aspect-ratio: 1;
+  place-items: center;
+
+  @include mq {
+    border-radius: length-md(10);
+
+    aspect-ratio: 1280 / 400;
+  }
+}
+.contact__text {
+  @include font-size(36);
+
+  @include mq {
+    @include font-size-md(72);
+  }
+}

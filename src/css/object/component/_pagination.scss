@@ -1,0 +1,76 @@
+@use "sass:math";
+@use "global" as *;
+
+.pagination {
+  display: flex;
+  align-items: baseline;
+  position: absolute;
+  top: calc(160 / 844 * 100%);
+  left: calc(50% - #{font-length(107 * 0.5)});
+
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+  gap: font-length(8);
+
+  @include mq {
+    top: 50%;
+    left: length-md(16);
+    transform: rotate(-90deg) translateX(-50%);
+
+    gap: font-length-md(12);
+    transform-origin: top left;
+  }
+}
+.pagination__current {
+  @include font-size(36);
+
+  display: flex;
+  align-items: baseline;
+
+  @include mq {
+    @include font-size-md(48);
+  }
+}
+.pagination__number-wrapper {
+  display: block;
+  height: 1em;
+  overflow: hidden;
+}
+.pagination-number {
+  @include mq {
+  }
+}
+.pagination__line {
+  background: currentColor;
+  width: font-length(3);
+  height: font-length(26);
+  transform: rotate(30deg);
+
+  @include mq {
+    width: font-length-md(3);
+    height: font-length-md(36);
+  }
+}
+.pagination__total {
+  @include font-size(18);
+
+  min-width: font-length(44);
+
+  @include mq {
+    @include font-size-md(24);
+
+    min-width: auto;
+  }
+}
+
+.js-cube {
+  position: absolute;
+  width: length($mobile);
+  visibility: hidden;
+  pointer-events: none;
+
+  aspect-ratio: 1/1;
+
+  @include mq {
+    width: 50%;
+  }
+}

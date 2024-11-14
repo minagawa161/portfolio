@@ -1,0 +1,111 @@
+@use "sass:math";
+@use "global" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: length(24) calc(#{length(10)} + var(--scrollbar-width, 0)) 0
+  length(10);
+  z-index: 999 + 1;
+
+  @include mq {
+    align-items: flex-end;
+    padding: length-md(20) calc(#{length-md(40)} + var(--scrollbar-width, 0)) 0
+    length-md(40);
+  }
+  &.is-active {
+    .header-button__text {
+      transform: translateY(-100%);
+    }
+  }
+}
+
+.header__logo {
+  position: relative;
+  z-index: 2;
+}
+.header-logo {
+  display: grid;
+
+  gap: font-length(2);
+
+  @include mq {
+    gap: font-length-md(6);
+  }
+}
+.header-logo__main {
+  width: fit-content;
+}
+.header-logo__sub {
+  @include font-size(11);
+
+  width: fit-content;
+  letter-spacing: 0.095em;
+
+  @include mq {
+    @include font-size-md(13);
+
+    letter-spacing: 0.104em;
+  }
+}
+
+.header__button {
+  position: relative;
+  z-index: 2;
+}
+.header-button {
+  @include font-size(16);
+
+  display: flex;
+  align-items: center;
+}
+.header-button__inner {
+  display: inline-block;
+  position: relative;
+  min-width: font-length(41);
+  overflow: hidden;
+  text-align: center;
+}
+.header-button__text {
+  display: inline-block;
+  transition: transform 0.3s $ease-in-out-cubic;
+}
+
+.header-button__text--2 {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.header__menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+  transition: opacity 0.3s $ease-out-cubic, visibility 0.3s $ease-out-cubic;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 1;
+
+  @include mq {
+    position: static;
+    width: auto;
+    height: auto;
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+  }
+
+  &.is-active {
+    visibility: visible;
+    pointer-events: auto;
+    opacity: 1;
+  }
+}

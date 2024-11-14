@@ -1,0 +1,33 @@
+mixin image({path = imgDirectoryPath, imgName, device, deviceScale = 1, imgClass, alt = "", extension = "png"})
+  picture&attributes(attributes)
+    //- jpeg使用時は注意
+    case device
+      when "desktop"
+        //- webp
+        +source(`${path}/${imgName}_md@2x.${extension}.webp`)(media=`(min-width: ${large})` type="image/webp")
+        +source(`${path}/${imgName}_md.${extension}.webp`, `${path}/${imgName}_md@2x.${extension}.webp`)(media=`(min-width: ${medium})` type="image/webp")
+        +source(`${path}/${imgName}_md${deviceScale !== 1 ? `@${deviceScale}x` : ""}.${extension}.webp`)(type="image/webp")
+        //- webpが対応していない場合
+        +source(`${path}/${imgName}_md@2x.${extension}`)(media=`(min-width: ${large})` type=`image/${extension}`)
+        +source(`${path}/${imgName}_md.${extension}`, `${path}/${imgName}_md@2x.${extension}`)(media=`(min-width: ${medium})` type=`image/${extension}`)
+        +img(`${path}/${imgName}_md${deviceScale !== 1 ? `@${deviceScale}x` : ""}.${extension}`, alt)(class=imgClass)
+
+      when "mobile"
+        //- webp
+        +source(`${path}/${imgName}@2x.${extension}.webp`)(media=`(min-width: ${mobile})` type="image/webp")
+        +source(`${path}/${imgName}${deviceScale !== 1 ? `@${deviceScale}x` : ""}.${extension}.webp`)(type="image/webp")
+        //- webpが対応していない場合
+        +source(`${path}/${imgName}@2x.${extension}`)(media=`(min-width: ${mobile})` type=`image/${extension}`)
+        +img(`${path}/${imgName}${deviceScale !== 1 ? `@${deviceScale}x` : ""}.${extension}`, alt)(class=imgClass)
+
+      default
+        //- webp
+        +source(`${path}/${imgName}_md@2x.${extension}.webp`)(media=`(min-width: ${large})` type="image/webp")
+        +source(`${path}/${imgName}_md.${extension}.webp`, `${path}/${imgName}_md@2x.${extension}.webp`)(media=`(min-width: ${medium})` type="image/webp")
+        +source(`${path}/${imgName}@2x.${extension}.webp`)(media=`(min-width: ${mobile})` type="image/webp")
+        +source(`${path}/${imgName}.${extension}.webp`)(type="image/webp")
+        //- webpが対応していない場合
+        +source(`${path}/${imgName}_md@2x.${extension}`)(media=`(min-width: ${large})` type=`image/${extension}`)
+        +source(`${path}/${imgName}_md.${extension}`, `${path}/${imgName}_md@2x.${extension}`)(media=`(min-width: ${medium})` type=`image/${extension}`)
+        +source(`${path}/${imgName}@2x.${extension}`)(media=`(min-width: ${mobile})` type=`image/${extension}`)
+        +img(`${path}/${imgName}.${extension}`, alt)(class=imgClass)

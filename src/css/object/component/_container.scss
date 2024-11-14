@@ -1,0 +1,33 @@
+@use "sass:math";
+@use "global" as *;
+
+.canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -100;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 0 vmin($side-width);
+
+  @include mq {
+    padding: 0 vw($side-width-md, $desktop);
+  }
+}
+.container__inner {
+  width: 100%;
+
+  @include mq {
+    max-width: calc((#{$desktop} - #{$side-width-md * 2}px) * 1.25);
+  }
+}
+.container__footer {
+  @include mq {
+  }
+}

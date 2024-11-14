@@ -1,0 +1,42 @@
+@use "sass:math";
+@use "global" as *;
+
+.menu {
+  display: grid;
+  background: #212121;
+  overflow: auto;
+
+  place-items: center;
+
+  @include mq {
+    background: none;
+    overflow: visible;
+  }
+}
+
+.menu__content {
+  @include mq {
+  }
+}
+.menu-list {
+  display: grid;
+
+  gap: font-length(28);
+  place-items: center;
+
+  @include mq {
+    gap: font-length-md(8);
+    place-items: end;
+  }
+}
+.menu-list__item {
+  @include mq {
+  }
+}
+.menu-list__button {
+  @include font-size(36);
+
+  @include mq {
+    @include font-size-md(12);
+  }
+}

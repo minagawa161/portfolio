@@ -1,0 +1,295 @@
+//----------------------------------------------------------------
+//- 共通のレイアウトを継承
+//----------------------------------------------------------------
+extends /pug/layout/_default
+
+//----------------------------------------------------------------
+//- ページ毎の変数を追加(メタタグや相対パス、ページ固有データ)
+//----------------------------------------------------------------
+append variables
+  //- ページ固有データ
+  -
+    const works = [
+      {
+        heading: "Brilliant Design Collect",
+        url: "https://brilliantdesign.work/",
+        outline: {
+          note: `HTML - CSS - JavaScript - WordPress
+            PERIOD: 05/2022 - 08/2022`,
+          text: `デザイナーの<a class="text-link" rel="noopener noreferrer" href="https://twitter.com/shgtk" target="_blank">Shigetaka Mabe</a>さんからの依頼で、WebサイトのギャラリーサイトをWordPressで実装しました。機能的で美しい、制作者のインスピレーションを刺激するWebサイトが掲載されています。
+            グリッドが強く意識されたデザインだったので、ブレイクポイントを細かく分けて実装することでどの画面幅でもデザインの印象を損なわないようにしています。また、ダークモードも実装しました。`
+        }
+      },
+      {
+        heading: "Photographer TAKU HIRASE",
+        url: "https://takuhirase.com/",
+        outline: {
+          note: `HTML - CSS - JavaScript (WebGL) - WordPress
+            PERIOD: 11/2020 - 04/2021`,
+          text: `デザイナーの<a class="text-link" rel="noopener noreferrer" href="https://twitter.com/shgtk" target="_blank">Shigetaka Mabe</a>さんからの依頼で、写真家の平瀬拓様のポートフォリオサイトをWordPressを使って実装しました。写真が使用されたコンテンツを中心に紹介することで、強みがアピールできるように設計されています。
+            トップページのスライダーはWebGLを使って画像を切り替えています。デザイナーと相談しながらディストーションエフェクト用の画像をいくつも試して実装しました。`
+        }
+      },
+    ]
+
+    const about = {
+      heading: {
+        main: "# about"
+      },
+      list: [
+        {
+          heading: `who I am`,
+          profile: {
+            heading: `Toshihiro Minagawa`,
+            text: `1991年生まれ。滋賀県出身。株式会社揚羽 制作第2部 エンジニアグループ サブマネージャー。
+              コーポレートサイト, 採用サイト, 特設サイト, Webアプリケーション開発を主に担当しています。
+              ブランディングのために、WebサイトのアニメーションをCSS, Canvas 2D・WebGLを用いて実装することが多いです。`
+          }
+        },
+        {
+          heading: `experience`,
+          experience: {
+            list: [
+              {
+                heading: `- 2017`,
+                text: `ritsumeikan university`,
+              },
+              {
+                heading: `2018 - now`,
+                text: `ageha inc.`,
+              },
+            ]
+          }
+        },
+        {
+          heading: `capability`,
+          capability: {
+            list: [
+              {
+                heading: `Front-end engineering`,
+                text: `HTML, CSS, JavaScriptを使ったWebサイト制作をしています。WebGLや、React, Vue.jsを用いたWebアプリケーション開発など、社内で取り組んでいるメンバーがいなくても技術習得に挑戦し、リーダーシップを発揮してきました。`,
+              },
+              {
+                heading: `Management`,
+                text: `エンジニアグループのマネジメントをしています。2020年4月にリーダー、2021年4月にサブマネージャーに昇進しました。案件のアサイン・スケジュール管理, メンバーとのレビュー, 実装のサポート, 勉強会の実施などの業務をしています。エンジニア採用の書類審査や面接の経験もあります。`,
+              },
+              {
+                heading: `Workflow improvement`,
+                text: `納品物の品質向上を目指し、エンジニアグループに限らず業務改善を行いました。グループ内では、<a class="text-link" rel="noopener noreferrer" href="https://zenn.dev/minagawa161/articles/0b26015518be86" target="_blank">レスポンシブデザイン実装のガイドライン</a>の作成, 開発環境の構築・メンテナンスなどを行いました。グループをまたいだ施策としては、クライアントへのデザイン提出のフローの整備, デザインから実装までのフェーズの振り返り会実施の整備などを行いました。`,
+              },
+            ]
+          }
+        },
+        {
+          heading: `link`,
+          link: {
+            list: [
+              {
+                heading: `x`,
+                url: `https://x.com/minagawa161`,
+              },
+              {
+                heading: `GitHub`,
+                url: `https://github.com/minagawa161`,
+              },
+              {
+                heading: `Zenn`,
+                url: `https://zenn.dev/minagawa161`,
+              },
+            ]
+          }
+        },
+      ]
+    }
+
+//----------------------------------------------------------------
+//- ページ毎のcssを追加
+//----------------------------------------------------------------
+//- append css
+  link(rel="stylesheet" href=cssPath)
+
+//----------------------------------------------------------------
+//- ページ毎のjsを追加
+//----------------------------------------------------------------
+append js
+  script(src=jsPath defer)
+
+//----------------------------------------------------------------
+//- mainコンテンツを記述
+//----------------------------------------------------------------
+block content
+  .js-css-custom-properties
+  +header
+  canvas.js-canvas.canvas
+  .js-cube
+  .pagination.js-pagination
+    .pagination__current
+      | 0
+      .pagination__number-wrapper
+        .js-number
+          - for (let i = 0; i < works.length + 1; i++)
+            div
+              | !{i + 1}
+    .pagination__line
+    .pagination__total
+      | !{String(works.length + 1).padStart(2, '0')}
+  .js-stalker.stalker.uppercase
+    | view
+    | more
+  .js-scroll-down.scroll-down.uppercase
+    | (&nbsp;scroll down&nbsp;
+    span.scroll-down-icon
+      .scroll-down-icon__item.scroll-down-icon__item--1
+        | ↓
+      .scroll-down-icon__item.scroll-down-icon__item--2
+        | ↓
+    | &nbsp;)
+  .modal.js-modal.js-about-modal(role="dialog" aria-modal="true" aria-label=about.heading.main)
+    .modal__content.js-modal-content
+      .about
+        .title-2
+          - for (let i = 0; i < 9; i++)
+            .title-2__item.js-heading-wrapper
+              .heading-1.js-heading.uppercase(aria-hidden=i !== 0 && "true")
+                | !{about.heading.main}
+        .about__body
+          .about__fig-wrapper.js-fig-wrapper
+            //- +image({imgName: `img_${pageIdentifier}_about_1`, imgClass: "about__img js-img"}).about__picture
+            .about__img
+          ul.about__wrapper.about-list.js-other
+            each item, index in about.list
+              li.about-list__item(class=item.link && `about-list__item--link`)
+                .heading-2
+                  | &lt;&nbsp;#{item.heading}&nbsp;&gt;
+                if item.profile
+                  .about-profile
+                    .about-profile__heading
+                      | !{item.profile.heading}
+                    .text-1
+                      | !{item.profile.text}
+                if item.experience
+                  .about-experience
+                    .about-experience__item
+                      .about-experience__head.uppercase
+                        | year
+                      .about-experience__body.uppercase
+                        | belong
+                    each listItem in item.experience.list
+                      .about-experience__item
+                        .about-experience__head.uppercase
+                          | !{listItem.heading}
+                        .about-experience__body.uppercase
+                          | !{listItem.text}
+                if item.capability
+                  .about-capability
+                    each listItem, listItemIndex in item.capability.list
+                      .about-capability__item
+                        .about-capability__head.uppercase
+                          | !{String(listItemIndex + 1).padStart(2, '0')}&#058;
+                          br
+                          | !{listItem.heading}
+                        .text-1
+                          | !{listItem.text}
+                if item.link
+                  ul.about-link
+                    each listItem in item.link.list
+                      li.about-link__item
+                        a(href=listItem.url target="_blank").button-wrapper
+                          | !{listItem.heading}
+                          span.button-bg
+                            span.button-bg__inner
+        .about__foot
+          .modal-nav
+            button.modal-nav__item.modal-nav__item--4(type="button").js-modal-close-button.uppercase.button-wrapper
+              | (&emsp;back to list&emsp;)
+              span.button-bg
+                span.button-bg__inner
+      footer.footer.modal__foot
+        a.contact(href="mailto:toshihiro.minagawa@gmail.com").button-wrapper
+          .contact__text.uppercase
+            | get in touch
+          span.button-bg.button-bg--contact
+            span.button-bg__inner
+
+        .uppercase.note-1
+          | copyright toshihiro minagawa
+  each item, index in works
+    .modal.js-modal.js-work-modal(role="dialog" aria-modal="true" aria-label=item.heading)
+      .modal__content.js-modal-content
+        .work
+          .work__head
+            .title-1
+              .title-1__sub-heading.js-sub-heading.uppercase
+                | # work
+              .title-1__main
+                - for (let i = 0; i < 8; i++)
+                  span.title-1__item
+                    span.title-1__heading.js-heading(aria-hidden=i !== 0 && "true")
+                      | !{item.heading}
+            .work__fig-wrapper.js-fig-wrapper
+              +image({imgName: `img_${pageIdentifier}_${index + 1}`, imgClass: "work__img js-img"}).work__picture
+          .work__body
+            .work-outline.js-other
+              .work-outline__head
+                .heading-2
+                  | &lt;&nbsp;outline&nbsp;&gt;
+                .note-1
+                  | !{item.outline.note}
+                a.button-1(href=item.url target="_blank" rel="noopener noreferrer").button-wrapper
+                  .button-1__text.note-1
+                    | View Site
+                  .button-1__icons
+                    svg(xmlns="http://www.w3.org/2000/svg", width="11.854", height="11.854", viewBox="0 0 11.854 11.854").button-1__icon.button-1__icon--1
+                      path(d="M6.972-.648l.84.84L11.04-3.024,7.812-6.252l-.84.852L8.736-3.624H.72v1.2H8.736Z", transform="translate(3.912 12.227) rotate(-45)", fill="#fff")
+                    svg(xmlns="http://www.w3.org/2000/svg", width="11.854", height="11.854", viewBox="0 0 11.854 11.854").button-1__icon.button-1__icon--2
+                      path(d="M6.972-.648l.84.84L11.04-3.024,7.812-6.252l-.84.852L8.736-3.624H.72v1.2H8.736Z", transform="translate(3.912 12.227) rotate(-45)", fill="#fff")
+                  span.button-bg.button-bg--button-1
+                    span.button-bg__inner
+              .work-outline__body.text-1
+                | !{item.outline.text}
+
+            .work__movies
+              .work-movie.work-movie--1
+                .work-movie__head
+                  .heading-2
+                    | &lt;&nbsp;desktop&nbsp;&gt;
+                .work-movie__body.js-movie
+                  button.work-movie__button(type="button").js-button
+                    span.sr-only
+                      | play
+                    svg(xmlns="http://www.w3.org/2000/svg", width="50", height="40", viewBox="0 0 50 40").work-movie__icon
+                      g(transform="translate(50) rotate(90)", fill="none")
+                        path(d="M20,0,40,50H0Z", stroke="none")
+                        path(d="M 20 2.692588806152344 L 1.477035522460938 49 L 38.52296447753906 49 L 20 2.692588806152344 M 20 0 L 40 50 L 0 50 L 20 0 Z", stroke="none", fill="#212121")
+                  video(preload="metadata" controls muted).work-movie__video.js-video
+                    source(src=`${movDirectoryPath}/mov_index_${index + 1}_md.mp4`, type="video/mp4")
+          .work__foot
+            .modal-nav
+              button.modal-nav__item.modal-nav__item--1.modal-nav__item--small.js-modal-nav-button.uppercase.button-wrapper(
+                type="button"
+                data-index=(index - 1 < 0 ? works.length - 1 : index - 1) + 1
+                disabled=index === 0
+              )
+                | ←&emsp;prev
+                span.button-bg
+                  span.button-bg__inner
+              button.modal-nav__item.modal-nav__item--2.modal-nav__item--small.js-modal-nav-button.uppercase.button-wrapper(
+                type="button"
+                data-index=(index + 1 > works.length - 1 ? 0 : index + 1) + 1
+                disabled=index === works.length - 1
+              )
+                | next&emsp;→
+                span.button-bg
+                  span.button-bg__inner
+              button.modal-nav__item.modal-nav__item--3(type="button").js-modal-close-button.uppercase.button-wrapper
+                | (&emsp;back to list&emsp;)
+                span.button-bg
+                  span.button-bg__inner
+        footer.footer.modal__foot
+          a.contact(href="mailto:toshihiro.minagawa@gmail.com").button-wrapper
+            .contact__text.uppercase
+              | get in touch
+            span.button-bg.button-bg--contact
+              span.button-bg__inner
+          .footer__copyright.uppercase.note-1
+            | copyright toshihiro minagawa

@@ -1,0 +1,53 @@
+@use "global" as *;
+
+.br {
+  &::before {
+    content: "\A";
+    white-space: pre;
+  }
+}
+.inline-block {
+  display: inline-block;
+}
+.none-mobile {
+  display: none;
+
+  @include mq {
+    display: block;
+  }
+}
+.none-md {
+  @include mq {
+    display: none;
+  }
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  border-width: 0;
+  white-space: nowrap;
+
+  clip: rect(0, 0, 0, 0);
+}
+
+// js
+.js-css-custom-properties {
+  overflow-y: scroll;
+  visibility: hidden;
+}
+.js-cube {
+  position: absolute;
+  width: length($mobile);
+  visibility: hidden;
+  pointer-events: none;
+
+  aspect-ratio: 1/1;
+
+  @include mq {
+    width: 50%;
+  }
+}

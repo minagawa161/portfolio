@@ -1,0 +1,14 @@
+-
+  const DESIGN_WIDTHS = {
+    mobile: "390px",
+    desktop: "1440px",
+  };
+  const { mobile, desktop } = DESIGN_WIDTHS;
+  const BREAKPOINTS = {
+    small: `${stripUnit(mobile) * 1.5}px`,
+    medium: `${stripUnit(desktop) * 0.75}px`,
+    large: desktop,
+    xlarge: `${stripUnit(desktop) * 1.25}px`,
+  };
+  const { small, medium, large, xlarge } = BREAKPOINTS;
+

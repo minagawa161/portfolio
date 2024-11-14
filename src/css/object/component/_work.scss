@@ -1,0 +1,169 @@
+@use "sass:math";
+@use "global" as *;
+
+.work {
+  padding-top: length(234);
+
+  @include mq {
+    padding-top: length-md(234);
+  }
+}
+.work__fig-wrapper {
+  background: #333;
+  margin-top: length(30);
+  overflow: hidden;
+  border-radius: length(10);
+
+  aspect-ratio: 720/450;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+
+  @include mq {
+    margin-top: length-md(84);
+    margin-left: auto;
+    border-radius: length-md(10);
+  }
+}
+.work__img {
+  height: 100%;
+
+  object-fit: cover;
+  transform-origin: top center;
+}
+.work__body {
+  margin-top: length(60);
+
+  @include mq {
+    margin-top: length-md(78);
+  }
+}
+.work-outline {
+  display: grid;
+  background: rgba(#fff, 0.1);
+  padding: length(48) length(20);
+
+  gap: length(20);
+
+  @include mq {
+    display: flex;
+    align-items: flex-start;
+    padding: length-md(40);
+
+    gap: length-md(56);
+  }
+}
+.work-outline__head {
+  display: grid;
+
+  gap: length(24);
+
+  @include mq {
+    width: 100%;
+
+    gap: length-md(20);
+  }
+}
+.work-outline__body {
+  @include mq {
+    flex-shrink: 0;
+    width: length-md(680);
+  }
+}
+.work__movies {
+  display: grid;
+  margin-top: length(104);
+
+  gap: length(100);
+
+  @include mq {
+    margin-top: length-md(120);
+
+    gap: length-md(100);
+  }
+}
+.work-movie {
+  @include mq {
+    display: flex;
+
+    gap: length-md(114);
+  }
+}
+.work-movie--1 {
+  display: grid;
+
+  gap: length(20);
+
+  .work-movie__video {
+    aspect-ratio: 1280/800;
+  }
+}
+.work-movie--2 {
+  display: flex;
+
+  gap: length(16);
+
+  .work-movie__body {
+    @include mq {
+      width: length-md(360);
+    }
+  }
+  .work-movie__video {
+    aspect-ratio: 360/640;
+  }
+}
+.work-movie__head {
+  flex-shrink: 0;
+
+  @include mq {
+    min-width: font-length-md(126);
+  }
+}
+.work-movie__body {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: length(10);
+
+  @include mq {
+    border-radius: length-md(10);
+  }
+}
+.work-movie__button {
+  @include hover {
+    .work-movie__icon {
+      transform: scale(1.2);
+    }
+  }
+
+  display: grid;
+  background: rgba(#efefef, 1);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  visibility: visible;
+  transition: opacity 0.3s $ease-out-cubic, visibility 0.3s $ease-out-cubic;
+  opacity: 1;
+  z-index: 1;
+
+  place-items: center;
+  &.is-active {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+.work-movie__icon {
+  width: length(34);
+  transition: transform 0.5s $ease-out-cubic;
+
+  @include mq {
+    width: length-md(40);
+  }
+}
+.work__foot {
+  margin-top: length(84);
+
+  @include mq {
+    margin-top: length-md(150);
+  }
+}

@@ -1,0 +1,6 @@
+-
+  const stripUnit = (value) => {
+    return (Number((value || '').toString().replace(/[^\d\.-]/gi, '')) || null);
+  };
+
+

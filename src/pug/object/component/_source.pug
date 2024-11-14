@@ -1,0 +1,13 @@
+mixin source(...images)
+  -
+    const { width, height } = imageSize(images[0]); // gulp-dataで定義したimageSize関数
+    let srcset = ""
+    for (let index = 0; index < images.length; index++) {
+      srcset = `${index ? srcset + "," : srcset} ${images[index]} ${index + 1}x`
+    }
+
+  source(
+    srcset=srcset
+    width=width
+    height=height
+  )&attributes(attributes)

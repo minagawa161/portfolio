@@ -1,0 +1,28 @@
+// FLOCSSのディレクトリ構成を参考に。
+// Layoutレイヤーは、ObjectレイヤーのComponentレイヤーで管理
+// https://github.com/hiloki/flocss
+
+// global
+@use "global/index";
+// foundation
+@use "foundation/minireset";
+@use "foundation/base";
+
+// object
+// utility
+@use "object/utility/utility";
+
+// component
+@use "object/component/header";
+@use "object/component/menu";
+@use "object/component/footer";
+@use "object/component/contact";
+@use "object/component/container";
+@use "object/component/text";
+@use "object/component/button";
+@use "object/component/modal";
+@use "object/component/work";
+@use "object/component/about";
+@use "object/component/stalker";
+@use "object/component/scroll-down";
+@use "object/component/pagination";
